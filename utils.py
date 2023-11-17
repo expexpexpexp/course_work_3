@@ -23,7 +23,3 @@ def mask_number(number):
     """Номер карты замаскирован и не отображается целиком в формате  XXXX XX** **** XXXX """
     return f"{number[:4]}{number[4:8]}** **** {number[-4:]}"
 
-
-if __name__ == "__main__":
-    test_date = "2019-08-26T10:50:58.294041"
-    load_datetime(test_date)
