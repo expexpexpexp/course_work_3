@@ -14,10 +14,8 @@ operations_list = load_json(filename)
 """Последние 5 выполненных (EXECUTED) операций выведены на экран."""
 def formatted_executed(data):
     operations_executed = [op for op in data if op.get('state') == 'EXECUTED']
-    if len(operations_executed) >= 5:
-        last_5_executed_operations = operations_executed[-5:]
-        operations_executed_sorted = sorted(last_5_executed_operations, key=lambda x: x['date'], reverse=True)[:5]
-        return operations_executed_sorted
+    operations_executed_sorted = sorted(operations_executed, key=lambda x: x['date'], reverse=True)[:5]
+    return operations_executed_sorted
 
 
 """Дата перевода представлена в формате ДД.ММ.ГГГГ (пример: 14.10.2018)."""
@@ -37,7 +35,7 @@ last_5_operations = formatted_executed(operations_list)
 
 """Вывод информации о последних 5 операциях"""
 for operation in last_5_operations:
-    date = operation['date'][:10]
+    date = load_datetime(operation['date'])
     description = operation['description']
     from_account = mask_number(operation.get('from', ''))
     to_account = f"Счет **{operation['to'][-4:]}"
